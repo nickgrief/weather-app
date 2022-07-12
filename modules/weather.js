@@ -30,7 +30,9 @@ function getCoordsURL(cityName, stateCode = "", countryCode = "") {
 }
 
 async function getCoordsData(cityName, stateCode = "", countryCode = "") {
-  const response = await fetch(getCoordsURL(cityName, stateCode, countryCode));
+  const response = await fetch(getCoordsURL(cityName, stateCode, countryCode), {
+    mode: "cors",
+  });
   const matches = await response.json();
   const firstMatch = await matches[0];
   return [await firstMatch.lat, await firstMatch.lon];
