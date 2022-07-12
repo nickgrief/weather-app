@@ -32,8 +32,12 @@ function createInputField(cardHolder) {
     if (event.key === "Enter") {
       event.preventDefault();
       let weatherData = await getWeatherData(cityInput.value);
-      if (await weatherData) {
-        cardHolder.prepend(createCityWeatherCard(weatherData));
+      if (weatherData) {
+        console.log(weatherData);
+        for (let city of weatherData.reverse()) {
+          console.log(city);
+          cardHolder.prepend(createCityWeatherCard(city));
+        }
       } else {
         cityInput.placeholder = "Can't find city";
       }

@@ -10,7 +10,9 @@
 
 .city-weather-card {
   box-sizing: border-box;
-  width: 95vw;
+  min-width: fit-content;
+  width: 80vw;
+  max-width: 500px;
   background-color: lightskyblue;
   border-radius: 1rem;
   box-shadow: 4px 4px 1px royalblue;

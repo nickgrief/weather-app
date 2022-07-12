@@ -7,10 +7,19 @@ export default async function getWeatherData(
 ) {
   try {
     const coords = await getCoordsData(cityName, stateCode, countryCode);
-    let response = await fetch(getWeatherURL(coords[0], coords[1]), {
-      mode: "cors",
-    });
-    return await response.json();
+    let response = [];
+
+    for (let coord of coords) {
+      response.push(
+        await fetch(getWeatherURL(coord.lat, coord.lon), {
+          mode: "cors",
+        })
+      );
+    }
+
+    let json = response.map((value) => value.json());
+
+    return await Promise.all(json);
   } catch {
     return null;
   }
@@ -24,7 +33,7 @@ function getCoordsURL(cityName, stateCode = "", countryCode = "") {
   const stateCodeString = stateCode ? "," + stateCode : stateCode;
   const countryCodeString = countryCode ? "," + countryCode : countryCode;
 
-  const limit = 5;
+  const limit = 3;
 
   return `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}${stateCodeString},${countryCodeString}&limit=${limit}&appid=${API_KEY}`;
 }
@@ -34,6 +43,6 @@ async function getCoordsData(cityName, stateCode = "", countryCode = "") {
     mode: "cors",
   });
   const matches = await response.json();
-  const firstMatch = await matches[0];
-  return [await firstMatch.lat, await firstMatch.lon];
+  console.log(matches);
+  return matches;
 }
