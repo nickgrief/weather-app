@@ -48,7 +48,6 @@ function createInputField(cardHolder) {
 }
 
 function createCityWeatherCard(weatherData) {
-  console.log(weatherData);
   const cityWeatherCardWrapper = document.createElement("div");
   cityWeatherCardWrapper.classList.toggle("city-weather-card");
 
