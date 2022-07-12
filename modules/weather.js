@@ -26,7 +26,7 @@ function getCoordsURL(cityName, stateCode = "", countryCode = "") {
 
   const limit = 5;
 
-  return `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}${stateCodeString},${countryCodeString}&limit=${limit}&appid=${API_KEY}`;
+  return `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}${stateCodeString},${countryCodeString}&limit=${limit}&appid=${API_KEY}`;
 }
 
 async function getCoordsData(cityName, stateCode = "", countryCode = "") {
